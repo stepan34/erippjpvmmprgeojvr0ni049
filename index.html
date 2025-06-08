@@ -1,2 +1,27 @@
-print("CHECKER MRKT NIGERFUCKER")
-STOPER = input("Enter enter to enter")
+import tkinter as tk
+
+def paint(event):
+    x1, y1 = (event.x - 2), (event.y - 2)
+    x2, y2 = (event.x + 2), (event.y + 2)
+    canvas.create_oval(x1, y1, x2, y2, fill="red", outline="red")
+
+root = tk.Tk()
+root.overrideredirect(True)   # Убирает рамку окна
+root.wm_attributes("-topmost", True)  # Поверх всех окон
+root.wm_attributes("-transparentcolor", "white")  # Белый цвет будет прозрачным
+
+# Размер окна (например, на весь экран)
+root.geometry("800x600+100+100")
+root.config(bg='white')  # Прозрачный фон
+
+canvas = tk.Canvas(root, width=800, height=600, bg='white', highlightthickness=0)
+canvas.pack(fill="both", expand=True)
+
+canvas.bind("<B1-Motion>", paint)  # Рисование мышью
+
+# Возможность закрыть окно по двойному клику
+def close(event):
+    root.destroy()
+canvas.bind("<Double-Button-1>", close)
+
+root.mainloop()
